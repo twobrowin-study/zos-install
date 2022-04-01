@@ -1,0 +1,148 @@
+#
+# Configuration file for Hercules ESA/390 emulator
+#
+CPUSERIAL 777777
+CPUMODEL  2096
+MAINSIZE  1024
+XPNDSIZE  0
+CNSLPORT  3270
+NUMCPU    8
+#ARCHMODE  ESAME
+ARCHMODE	z/Arch	# Architecture mode S/370, ESA/390 or z/Arch
+
+#############################################################
+# CS	CLPA and cold start of JES2. Base z/OS system functions i.e. no CICS, DB2, IMS, WAS, etc.
+# WS	Warm start of JES2. Base z/OS system functions i.e. no CICS, DB2, IMS, WAS, etc.
+# 4C	CLPA and cold start of JES2, loads the CICS 4.2 libraries, starts up CICS 4.2.
+# 4W	Warm start of JES2, and starts up CICS 4.2.
+# CC	CLPA and cold start of JES2, loads the CICS 4.1 libraries, starts up CICS 4.1.
+# CW	Warm start of JES2, and starts up CICS 4.1.
+# 1C	CLPA, cold start of JES2, starts up DB2 10.
+# 1W	Warm start of JES2, starts up DB2 10.
+# 9C	CLPA, cold start of JES2, starts up DB2 V9.
+# 9W	Warm start of JES2, starts up DB2 V9.
+# IC	CLPA and cold start of JES2 and load the IMS Libraries, starts IMS.
+# IW	Warm start of JES2 starts IMS.
+# BC	CLPA and cold start of JES2, load WAS libraries, WAS is manually started
+# BW	Warm start of JES2, WAS is manually started.
+# DC	CLPA, brings in CICS LPA modules, cold start of JES2, starts up DB2 10 and CICS 4.2.
+# DB	Warm start of JES2 and starts the DB2 10 and CICS 4.2.
+# AC	CLPA and cold start of JES2, load IMS and CICS libraries, starts IMS, DB2 10 and CICS 4.2
+# AW	Warm start of JES2, starts IMS, DB2 10, and CICS 4.2
+##############################################################
+#LOADPARM  0A82CS
+LOADPARM  0A82AC
+#LOADPARM  0A9ESAM
+
+SYSEPOCH  1900
+TZOFFSET  +0000
+TODDRAG   1
+
+OSTAILOR	z/OS		# OS tailoring
+# OSTAILOR  VM
+#OSTAILOR  OS/390
+
+PANRATE 50
+PGMPRDOS  LICENSED
+
+#HTTPPORT	8082 noauth userid password	# HTTP server port
+#HTTPROOT	/usr/share/hercules/		# HTTP root directory
+
+MODPATH	/usr/lib/hercules	# Where to search for modules
+
+# .-----------------------------Device number
+# |     .-----------------------Device type
+# |     |       .---------------File name
+# |     |       |
+# V     V       V
+#---    ----    --------------------
+#0009    3215-C  / noprompt
+#000B    3505    localhost:3505 sockdev autopad trunc ascii 
+#000C    3505    rdr/jcl.txt
+#000D    3525    pun/punch00d.txt ascii
+#000E    1403    prt/print00e.txt crlf
+#
+0a80 3390 zOS.113.s.2013/sdres1.cckd sf=dasd/sf/sdres1_*.sf
+0a81 3390 zOS.113.s.2013/sdres2.cckd sf=dasd/sf/sdres2_*.sf
+0a82 3390 zOS.113.s.2013/sdsys1.cckd sf=dasd/sf/sdsys1_*.sf
+0a83 3390 zOS.113.s.2013/sduss1.cckd sf=dasd/sf/sduss1_*.sf
+0a84 3390 zOS.113.s.2013/sduss2.cckd sf=dasd/sf/sduss2_*.sf
+0a85 3390 zOS.113.s.2013/sdpaga.cckd sf=dasd/sf/sdpaga_*.sf
+0a86 3390 zOS.113.s.2013/sdpagb.cckd sf=dasd/sf/sdpagb_*.sf
+0a87 3390 zOS.113.s.2013/sdpagc.cckd sf=dasd/sf/sdpagc_*.sf
+0a88 3390 zOS.113.s.2013/sdpagd.cckd sf=dasd/sf/sdpagd_*.sf
+0a89 3390 zOS.113.s.2013/sdpage.cckd sf=dasd/sf/sdpage_*.sf
+0a8a 3390 zOS.113.s.2013/sdpagf.cckd sf=dasd/sf/sdpagf_*.sf
+0a8b 3390 zOS.113.s.2013/sdprd1.cckd sf=dasd/sf/sdprd1_*.sf
+0a8c 3390 zOS.113.s.2013/sdprd2.cckd sf=dasd/sf/sdprd2_*.sf
+0a8d 3390 zOS.113.s.2013/sdprd3.cckd sf=dasd/sf/sdprd3_*.sf
+0a8e 3390 zOS.113.s.2013/sddis1.cckd sf=dasd/sf/sddis1_*.sf
+0a8f 3390 zOS.113.s.2013/sddis2.cckd sf=dasd/sf/sddis2_*.sf
+0a90 3390 zOS.113.s.2013/sddis3.cckd sf=dasd/sf/sddis3_*.sf
+0a91 3390 zOS.113.s.2013/sddis4.cckd sf=dasd/sf/sddis4_*.sf
+0a92 3390 zOS.113.s.2013/sddis5.cckd sf=dasd/sf/sddis5_*.sf
+0a93 3390 zOS.113.s.2013/sddis6.cckd sf=dasd/sf/sddis6_*.sf
+0a94 3390 zOS.113.s.2013/sares1.cckd sf=dasd/sf/sares1_*.sf
+
+0a95 3390 zOS.113.s.2013/sdimb1.cckd sf=dasd/sf/sdimb1_*.sf
+0a96 3390 zOS.113.s.2013/sdimc1.cckd sf=dasd/sf/sdimc1_*.sf
+0a97 3390 zOS.113.s.2013/sdimu1.cckd sf=dasd/sf/sdimu1_*.sf
+0a98 3390 zOS.113.s.2013/sdimu2.cckd sf=dasd/sf/sdimu2_*.sf
+
+0aa3 3390 zOS.113.s.2013/sddba1.cckd sf=dasd/sf/sddba1_*.sf
+0aa4 3390 zOS.113.s.2013/sddba2.cckd sf=dasd/sf/sddba2_*.sf
+0aa5 3390 zOS.113.s.2013/sddba3.cckd sf=dasd/sf/sddba3_*.sf
+0aa6 3390 zOS.113.s.2013/sddbar.cckd sf=dasd/sf/sddbar_*.sf
+0aa7 3390 zOS.113.s.2013/sdbbn1.cckd sf=dasd/sf/sddbn1_*.sf
+0aa8 3390 zOS.113.s.2013/sdbbn2.cckd sf=dasd/sf/sddbn2_*.sf
+0aa9 3390 zOS.113.s.2013/sdkan1.cckd sf=dasd/sf/sdkan1_*.sf
+
+
+0580 3490
+
+#0381	3480 
+# 3480 TAPES : 280-283
+#280-283	3480
+	
+# CKD DASD : 300-307, 310-31F	
+#0300	3390	mydasd/work00.cckd  sf=mydasd/sf/work00_*.sf
+#0301	3390	mydasd/work01.cckd  sf=mydasd/sf/work01_*.sf
+#0302	3390	mydasd/work02.cckd  sf=mydasd/sf/work02_*.sf
+#0303	3390	mydasd/work03.cckd  sf=mydasd/sf/work03_*.sf
+#0304	3390	mydasd/work04.cckd  sf=mydasd/sf/work04_*.sf
+#0305	3390	mydasd/work05.cckd  sf=mydasd/sf/work05_*.sf
+#0306	3390	mydasd/work06.cckd  sf=mydasd/sf/work06_*.sf
+#0307	3390	mydasd/work07.cckd  sf=mydasd/sf/work07_*.sf
+#0308	3390	mydasd/work08.cckd  sf=mydasd/sf/work08_*.sf
+#0309	3390	mydasd/work09.cckd  sf=mydasd/sf/work09_*.sf
+#030A    3390    mydasd/sys2.cckd    sf=mydasd/sf/sys2_*.sf
+#030B    3390    mydasd/ivp01.cckd   sf=mydasd/sf/ivp01_*.sf
+
+#0700.8    3270
+
+#00c1    3270
+#00c2    3270
+#00c3    3270
+#00c4    3270
+
+# 3270 TERMINALS : 430-433, 460-463, 470-473
+0700	3270
+0701.7	3270
+
+# CTC TCPIP Link
+#	0500.2	LCS	-n /dev/net/tun 192.168.200.2
+#	0E20.2	CTCI	192.168.220.1 192.168.220.2
+#	0E22.2	CTCI	192.168.222.1 192.168.222.2
+#	0E40.2	CTCI	192.168.240.1 192.168.240.2
+
+#0E20 	3088    CTCI-W32 191.2.8.1 191.2.211.81 1024 64
+#0E21	3088    CTCI-W32 191.2.8.1 191.2.211.81 1024 64
+
+#0010 	3088    CTCI-W32 192.1.1.250 192.1.1.1 1024 64
+#0011	3088    CTCI-W32 192.1.1.250 192.1.1.1 1024 64
+#05DE 	3088    CTCI-W32 192.1.1.250 192.1.1.1 1024 64
+#05DF	3088    CTCI-W32 192.1.1.250 192.1.1.1 1024 64
+#05DE    3088    CTCI-W32 192.168.1.250 00-01-03-83-8E-3F 1024 64
+#05DF    3088    CTCI-W32 192.168.1.250 00-01-03-83-8E-3F 1024 64
+#05DE    3088    CTCI /dev/tun0 1500 192.168.2.47 192.168.2.37 255.255.255.0
+#05DF    3088    CTCI /dev/tun0 1500 192.168.2.47 192.168.2.37 255.255.255.0
