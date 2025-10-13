@@ -1,0 +1,9 @@
+all:
+  hosts:
+    hercules:
+  vars:
+    vault_path_inventory: _00_vms/data/hercules,inventory-secrets.yaml
+
+    workdir: "/home/{{ ansible_user }}"
+    zos_dir_name: zOS.113.s.2013
+    hercules_ports: "{{ range(3270, 3278) | list }}"

@@ -1,0 +1,29 @@
+---
+- name: Pull secrets from vault
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: bmstu.vats.init
+
+- name: Prepare hercules workdirs
+  hosts: all
+  tasks:
+    - name: Get stats of zOS directories
+      ansible.builtin.stat:
+        path: "{{ workdir }}/zOS-{{ item }}/{{ zos_dir_name }}"
+      register: zos_sts
+      loop: "{{ hercules_ports }}"
+
+    - name: Fail any of zOS directories does not exists
+      ansible.builtin.fail:
+        msg: "Whoops! Directory ~/zOS-{{ item.item }}/{{ zos_dir_name }} does not exist! You shuld unzip ~/_0_zOS.113.s.2013.zip ans save it as ~/zOS-{{ item.item }}/{{ zos_dir_name }}!"
+      when: not item.stat.exists
+      loop: "{{ zos_sts.results }}"
+
+    - name: Template config file
+      vars:
+        hercules_port: "{{ item }}"
+      ansible.builtin.template:
+        src: ../hercules/hercules.j2.cnf
+        dest: "{{ workdir }}/zOS-{{ item }}/hercules.cnf"
+      loop: "{{ hercules_ports }}"

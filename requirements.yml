@@ -1,0 +1,4 @@
+collections:
+  - name: https://gitlab.bmstu.ru/infra/vats.git
+    type: git
+    version: main
